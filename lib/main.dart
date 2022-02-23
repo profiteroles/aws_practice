@@ -1,5 +1,5 @@
-import 'package:aws_practice/screens/initial/bindings.dart';
-import 'package:aws_practice/values/routes.dart';
+import '../screens/home/bindings.dart';
+import '../values/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
@@ -14,8 +14,8 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'AWS Practice',
-      initialRoute: AppRoutes.initial,
-      initialBinding: InitialBinding(),
+      initialRoute: AppRoutes.home,
+      initialBinding: HomeBindings(),
       getPages: AppPages.pages,
       localizationsDelegates: const [FormBuilderLocalizations.delegate],
     );

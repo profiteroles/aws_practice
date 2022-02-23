@@ -1,0 +1,47 @@
+type Skill @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String!
+  lecturerID: ID! @index(name: "byLecturer")
+  studentID: ID! @index(name: "byStudent")
+}
+
+type Student @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  studend_id: String!
+  name: String!
+  github: String
+  profile_url: String
+  Skills: [Skill] @hasMany(indexName: "byStudent", fields: ["id"])
+}
+
+type Company @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String!
+  scale: String!
+  last_login: AWSTimestamp
+}
+
+type Lecturer @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  username: String!
+  email: AWSEmail!
+  bio: String
+  last_login: AWSTimestamp
+  Skills: [Skill] @hasMany(indexName: "byLecturer", fields: ["id"])
+}
+
+type Survey @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Questions: [Question] @hasMany(indexName: "bySurvey", fields: ["id"])
+  created_by: Lecturer @hasOne
+  submitted_by: Company @hasOne
+}
+
+type Question @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  question: String!
+  answer: String!
+  surveyID: ID! @index(name: "bySurvey")
+  created_by: Lecturer @hasOne
+}
+ 
